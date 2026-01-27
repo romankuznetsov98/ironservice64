@@ -1,0 +1,70 @@
+---
+interface IFooterProps {
+  logoSrc?: string;
+  logoAlt?: string;
+  description?: string;
+}
+
+const {
+  logoSrc = "./assets/68c14df658719eec11f94f7c_f36d154610edc7248bfe8b21b1fd953a_Logo (4).svg",
+  logoAlt = "Footer Logo",
+  description = "Find your perfect stay by selecting destination, dates, and guests.",
+} = Astro.props as IFooterProps;
+---
+
+<footer class="section footer">
+  <div class="padding-global">
+    <div class="container-medium">
+      <div class="footer-content">
+        <div class="column-footer">
+          <div class="footer-wrapper">
+            <div class="column-footer-logo">
+              <a
+                href="https://fazora.webflow.io/"
+                aria-current="page"
+                class="navbar-brand w-inline-block w--current"
+                ><img
+                  loading="lazy"
+                  src={logoSrc}
+                  alt={logoAlt}
+                  class="logo"
+                /></a
+              >
+              <p class="paragraph-regular left content-footer">
+                {description}
+              </p>
+              <p class="paragraph-regular left content-footer">
+                © Fazen, All rights reserved 2025
+              </p>
+            </div>
+            <div class="container-menu"></div>
+          </div>
+          <div class="container-menu-footer">
+            <div class="menu">
+              <div class="sub-menu">
+                <div class="sub-heading-regular white">Pages</div>
+              </div><a
+                href="https://fazora.webflow.io/properties"
+                class="navbar-link footer">Properties</a
+              ><a
+                href="https://fazora.webflow.io/blog"
+                class="navbar-link footer">Blog</a
+              >
+            </div>
+            <div class="menu">
+              <div class="sub-menu">
+                <div class="sub-heading-regular white">Informations</div>
+              </div><a
+                href="https://fazora.webflow.io/templates-info/license"
+                class="navbar-link footer">License</a
+              ><a
+                href="https://fazora.webflow.io/templates-info/changelog"
+                class="navbar-link footer">Changelog</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

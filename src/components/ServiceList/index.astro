@@ -1,0 +1,26 @@
+---
+import type { IServiceCardProps } from "../ServiceCard/index.astro";
+import ServiceCard from "../ServiceCard/index.astro";
+
+interface IServiceListProps {
+	services: IServiceCardProps[];
+}
+
+const { services = [] } = Astro.props as IServiceListProps;
+---
+
+<div role="list" class="grid properties w-dyn-items">
+	{
+		services.map((service) => (
+			<ServiceCard
+				title={service.title}
+				location={service.location}
+				bedrooms={service.bedrooms}
+				bathrooms={service.bathrooms}
+				price={service.price}
+				imageUrl={service.imageUrl}
+				propertyUrl={service.propertyUrl}
+			/>
+		))
+	}
+</div>

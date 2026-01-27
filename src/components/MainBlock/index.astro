@@ -1,0 +1,137 @@
+---
+export interface PropertyCard {
+  title: string;
+  location: string;
+  href: string;
+  image: string;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+}
+
+export interface MainBlockProps {
+  badgeText?: string;
+  heading?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  property: PropertyCard;
+  mainBackgroundImage?: string;
+}
+
+const {
+  badgeText = "Modern Luxury Residence",
+  heading = "Crafted for Modern Living",
+  description = "Modern architecture, prestigious settings, timeless design.",
+  ctaText = "Get Started",
+  ctaHref = "/properties",
+  property,
+  mainBackgroundImage,
+} = Astro.props as MainBlockProps;
+---
+
+<main class="section hero">
+  <div class="padding-global">
+    <div class="container-medium">
+      <div
+        data-w-id="hero-wrapper"
+        class="wrapper hero reveal"
+        style=`background-image: url('${mainBackgroundImage}');`
+        >
+        <!-- style=`opacity:1;transform:translate3d(0,0,0); background-image: url('${mainBackgroundImage}');` -->
+        <div class="hero-wrapper">
+          <div class="column-hero">
+            <div class="section-tittle left">
+              <div class="badge transparant">
+                <div class="tittle-badge white">{badgeText}</div>
+              </div>
+
+              <div class="text-content left">
+                <h1 class="heading-style-h1 left hero">{heading}</h1>
+                <p class="paragraph-large left hero">{description}</p>
+              </div>
+
+              <a href={ctaHref} class="button secondary w-button">
+                {ctaText}
+              </a>
+            </div>
+
+            <div class="collection-list-wrapper hero w-dyn-list">
+              <div role="list" class="grid hero w-dyn-items">
+                <div role="listitem" class="item w-dyn-item">
+                  <a
+                    href={property.href}
+                    class="card-cms properties w-inline-block"
+                  >
+                    <div class="tumbnail-wrapper">
+                      <div class="content-cms _2">
+                        <div class="column-wrapper-cms">
+                          <img
+                            src="/icons/location-white.svg"
+                            width="45"
+                            height="45"
+                            alt=""
+                            loading="lazy"
+                            class="icon"
+                          />
+                          <div class="title-badge cms-card">
+                            {property.location}
+                          </div>
+                        </div>
+
+                        <!-- <div class="column-wrapper-cms avabilty">
+                          <div class="badge mini">
+                            <div class="title-badge">{property.bedrooms}</div>
+                            <div class="title-badge">Bedroom</div>
+                          </div>
+                          <div class="badge mini">
+                            <div class="title-badge">{property.bathrooms}</div>
+                            <div class="title-badge">Bathroom</div>
+                          </div>
+                        </div> -->
+                      </div>
+
+                      <div class="content-cms">
+                        <div class="sub-heading-regular cms">
+                          {property.title}
+                        </div>
+                        {
+                          property.price && (
+                            <div class="column-wrapper-cms">
+                              <div class="sub-heading-regular price">$</div>
+                              <div class="sub-heading-regular price">
+                                {property.price}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </div>
+
+                      <img
+                        src={property.image}
+                        alt="Thumbnail"
+                        loading="lazy"
+                        class="tumbnail properties _2"
+                      />
+
+                      <div class="icon-wrapper popup" style="display:none">
+                        <img
+                          src="/icons/arrow-up-right.svg"
+                          width="45"
+                          height="45"
+                          alt=""
+                          loading="lazy"
+                          class="icon"
+                        />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,31 @@
+---
+export interface ISectionHeaderProps {
+    badgeText: string;
+    heading: string;
+    paragraph: string;
+}
+
+const {
+    badgeText = "Premium Estates",
+    heading = "Discover homes designed to inspire.",
+    paragraph = "Luxury residences where design meets comfort",
+} = Astro.props as ISectionHeaderProps;
+---
+
+<div
+    data-w-id="acf9572d-0302-28df-7d2e-f92e2218f39e"
+    
+    class="section-tittle"
+>
+    <div class="badge two">
+        <div class="tittle-badge">{badgeText}</div>
+    </div>
+    <div class="text-content">
+        <h2 class="heading-style-h2 center">
+            {heading}
+        </h2>
+        <p class="paragraph-large center">
+            {paragraph}
+        </p>
+    </div>
+</div>

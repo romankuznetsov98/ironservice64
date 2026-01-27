@@ -1,0 +1,32 @@
+---
+interface ISeo {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="/css/css.css" />
+    <link rel="stylesheet" href="/css/fazora.webflow.css" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot name="header" />
+    <slot />
+    <slot name="footer" />
+    <script src="/js/jquery-3.5.1.min.js" referrerpolicy="no-referrer"></script>
+
+    <!-- <script type="text/javascript" src="/webflow/webflow.schunk.36b8fb49256177c8.js"></script>
+    <script type="text/javascript" src="/webflow/webflow.schunk.e50e0b5a1eeabf22.js"></script>
+    <script type="text/javascript" src="/webflow/webflow.schunk.9dfb96661114d3db.js"></script> -->
+    <!-- <script type="module" src="/webflow/webflow.js"></script> -->
+  </body>
+</html>

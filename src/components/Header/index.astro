@@ -1,0 +1,81 @@
+---
+// Header.astro
+export interface NavLink {
+  title: string;
+  href: string;
+}
+
+export interface HeaderProps {
+  logoSrc?: string;
+  logoAlt?: string;
+  brandHref?: string;
+  ctaHref?: string;
+  ctaText?: string;
+  links?: NavLink[];
+}
+
+const {
+  logoSrc = "/logo.png",
+  logoAlt = "Logo",
+  brandHref = "/",
+  ctaHref = "/contact",
+  ctaText = "Оставить заявку",
+  links = [
+    { title: "Главная", href: "/" },
+    { title: "Услуги", href: "/services" },
+    { title: "О компании", href: "/about" },
+    { title: "Контакты", href: "/contact" },
+  ],
+} = Astro.props as HeaderProps;
+---
+
+<nav class="header">
+  <div class="nav">
+    <a href={brandHref} class="navbar-brand w-inline-block">
+      <img loading="lazy" src={logoSrc} alt={logoAlt} class="logo" />
+    </a>
+
+    <div class="button-wrap-nav">
+      <a href={ctaHref} class="button w-button">
+        {ctaText}
+      </a>
+    </div>
+
+    <div
+      data-animation="default"
+      data-collapse="tiny"
+      data-duration="400"
+      data-easing="ease"
+      data-easing2="ease"
+      role="banner"
+      class="navbar-no-shadow-container-2 w-nav"
+    >
+      <div class="navbar">
+        <div
+          class="menu-button w-nav-button"
+          aria-label="menu"
+          role="button"
+          tabindex="0"
+          aria-haspopup="menu"
+          aria-expanded="false"
+        >
+          <div class="menu-icon">
+            <div class="navbar-link-2">Menu</div>
+          </div>
+        </div>
+
+        <nav role="navigation" class="navbar-menu-wrapper w-nav-menu">
+          <div class="menu-list">
+            {links.map((link) => (
+              <a href={link.href} class="navbar-link">
+                {link.title}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
+
+      <div class="w-nav-overlay" data-wf-ignore></div>
+    </div>
+  </div>
+</nav>
