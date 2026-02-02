@@ -1,20 +1,14 @@
 ---
 export interface IServiceCardProps {
   title: string;
-  location: string;
-  bedrooms: number;
-  bathrooms: number;
-  price: number;
+  description: string;
   imageUrl: string;
   propertyUrl: string;
 }
 
 const {
   title = "Urban Elegance",
-  location = "Grand Harbor",
-  bedrooms = 2,
-  bathrooms = 2,
-  price = 9000,
+  description = "Ремонт",
   imageUrl = "./assets/68c0f540a40a075623084298_Modern Coastal Retreat.png",
   propertyUrl = "https://fazora.webflow.io/properties/urban-elegance",
 } = Astro.props as IServiceCardProps;
@@ -25,42 +19,50 @@ const {
     <div class="tumbnail-wrapper">
       <div class="content-cms _2">
         <div class="column-wrapper-cms">
-          <img
+          <!-- <img
             width="45"
             height="45"
             alt=""
             src="./assets/68c0f238ec1660243de7e8f4_mingcute--location-line.svg"
             loading="lazy"
             class="icon"
-          />
-          <div class="title-badge cms-card">{location}</div>
+          /> -->
+          <!-- <div class="title-badge cms-card">{location}</div> -->
         </div>
         <div class="column-wrapper-cms avabilty">
-          <div class="badge mini">
+          <!-- <div class="badge mini">
             <div class="title-badge">{bedrooms}</div>
             <div class="title-badge">Bedroom</div>
           </div>
           <div class="badge mini">
             <div class="title-badge">{bathrooms}</div>
             <div class="title-badge">Bathroom</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="content-cms">
         <div class="sub-heading-regular cms">{title}</div>
-        <div class="column-wrapper-cms">
+        <!-- <div class="column-wrapper-cms">
           <div class="sub-heading-regular price">$</div>
           <div class="sub-heading-regular price">{price}</div>
-        </div>
-      </div><img
+        </div> -->
+      </div>
+      <img
         style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
         src={imageUrl}
         alt="Tumbnail"
         loading="lazy"
         sizes="100vw"
-        srcset="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0f540a40a075623084298_Modern%20Coastal%20Retreat-p-500.png 500w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0f540a40a075623084298_Modern%20Coastal%20Retreat-p-800.png 800w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0f540a40a075623084298_Modern%20Coastal%20Retreat.png 992w"
         class="tumbnail properties"
       />
+      
+      <!-- Тута описание карточки -->
+      <div class="description-overlay">
+        <div class="description-content">
+          <p class="description-text">{description}</p>
+        </div>
+      </div>
+      
       <div
         style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
         class="icon-wrapper popup"
@@ -77,3 +79,109 @@ const {
     </div>
   </a>
 </div>
+
+<style>
+    .card-cms.properties {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+    }
+    
+    .tumbnail-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+    }
+    
+    .tumbnail.properties {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .content-cms {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        color: white;
+        padding: 20px;
+        transition: all 0.3s ease;
+        z-index: 2;
+    }
+    
+    .description-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+        padding: 20px;
+        pointer-events: none;
+    }
+    
+    .description-content {
+        color: white;
+        text-align: center;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+    
+    .description-text {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.4;
+        font-weight: 400;
+    }
+    
+    .card-cms.properties:hover .tumbnail.properties {
+        transform: scale(1.05);
+    }
+    
+    .card-cms.properties:hover .content-cms {
+      background: rgba(0, 0, 0, 0) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    
+    .card-cms.properties:hover .description-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .card-cms.properties:hover .description-content {
+        transform: translateY(0);
+    }
+    
+    .sub-heading-regular.cms {
+        font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: white;
+      background: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      filter: none !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+      position: relative;
+      z-index: 3;
+    }
+    
+    .card-cms.properties:hover .sub-heading-regular.cms {
+      color: transparent; 
+      text-shadow: none;
+    }
+</style>
