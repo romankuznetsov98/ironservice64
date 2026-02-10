@@ -11,6 +11,9 @@ import Footer from "../components/Footer/index.astro";
 import ContactForm from "../components/ContactForm/index.astro";
 import Testimonials from "../components/Testimonials/index.astro";
 
+import Slider from "./features/slider.astro"
+import Features from "./features/features.astro"
+
 const page = await getEntry("pages", "index");
 if (!page) throw new Error("Home page not found");
 
@@ -27,14 +30,14 @@ const { title, description, image, advantages, seo } = page.data;
 		heading="Iron Service - надежный партнер в ремонте бытовой техники"
 		mainBackgroundImage={image}
 		property={{
-			href: "/",
+			href: "/services",
 			image: "/hero/service2.jpg",
 			title: "Наши услуги",
 			location: "Саратов",
 			// price: "от 1500 руб.",
 		}}
 	/>
-	<Section>
+	<!-- <Section>
 		<div class="grid-highlights">
 			{
 				advantages.map((service: any) => (
@@ -47,41 +50,38 @@ const { title, description, image, advantages, seo } = page.data;
 				))
 			}
 		</div>
-	</Section>
+	</Section> -->
 	<Section>
 		<SectionHeader
 			badgeText="Наши услуги"
-			heading="Discover homes designed to inspire."
-			paragraph="Luxury residences where design meets comfort"
+			heading="Ремон любого вида техники"
+			paragraph="Недорогой и оперативный ремонт техники любой сложности"
 		/>
 		<div class="collection-list-wrapper sections w-dyn-list">
 			<ServiceList
 				services={[
 					{
-						title: "Urban Elegance",
-						location: "Grand Harbor",
-						bedrooms: 2,
-						bathrooms: 2,
-						price: "9000",
-						imageUrl: "/hero/service1.jpg",
+						title: "Ремонт бытовой техники",
+						description: "Полный спектр услуг по ремонту всех бытовых приборов -- от мелочей до сложной электроники",
+						imageUrl: "/hero/repair1.jpg",
 						propertyUrl: "#",
 					},
 					{
-						title: "Coastal Serenity",
-						location: "Oceanview",
-						bedrooms: 3,
-						bathrooms: 2,
-						price: "12000",
-						imageUrl: "/hero/service2.jpg",
+						title: "Ремонт компьютерной техники",
+						description: "От профилактики до сложного ремонта: заботимся о вашей технике. Всё что с кнопками и экранами: реанимируем, чиним, настраиваем",
+						imageUrl: "/hero/repair2.jpg",
 						propertyUrl: "#",
 					},
 					{
-						title: "Mountain Retreat",
-						location: "Highland Hills",
-						bedrooms: 4,
-						bathrooms: 3,
-						price: "15000",
-						imageUrl: "/hero/service3.jpg",
+						title: "Ремонт климатической техники",
+						description: "Grand Harbor",
+						imageUrl: "/hero/repair3.jpg",
+						propertyUrl: "#",
+					},
+					{
+						title: "Ремонт охранных систем",
+						description: "Grand Harbor",
+						imageUrl: "/hero/repair4.jpg",
 						propertyUrl: "#",
 					},
 				]}
@@ -89,7 +89,7 @@ const { title, description, image, advantages, seo } = page.data;
 		</div>
 		<a
 			data-w-id="ea84d01c-ab2e-9168-935f-62025977c07b"
-			href="https://fazora.webflow.io/properties"
+			href="/services"
 			class="button w-button">Все услуги</a
 		>
 	</Section>
@@ -104,267 +104,8 @@ const { title, description, image, advantages, seo } = page.data;
 			style="opacity: 1; transform: translate3d(0px, 25px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
 			class="grid _2"
 		>
-			<div class="wrapper-slider">
-				<div
-					data-delay="2000"
-					data-animation="slide"
-					class="slider w-slider"
-					data-autoplay="true"
-					data-easing="ease-in-out-circ"
-					data-hide-arrows="false"
-					data-disable-swipe="false"
-					data-autoplay-limit="0"
-					data-nav-spacing="3"
-					data-duration="500"
-					data-infinite="true"
-					role="region"
-					aria-label="carousel"
-				>
-					<div class="mask w-slider-mask" id="w-slider-mask-0">
-						<div
-							class="slide hero w-slide"
-							aria-label="1 of 4"
-							role="group"
-							style="transition: all, transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86); transform: translateX(-1732.5px); opacity: 0;"
-							aria-hidden="true"
-						>
-							<img
-								sizes="(max-width: 991px) 100vw, 992px"
-								srcset="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8f08144e2f11e0838_Modern%20Coastal%20Retreat-p-500.png 500w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8f08144e2f11e0838_Modern%20Coastal%20Retreat-p-800.png 800w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8f08144e2f11e0838_Modern%20Coastal%20Retreat.png 992w"
-								alt="Villa Modern"
-								src="./assets/68c220c8f08144e2f11e0838_Modern Coastal Retreat.png"
-								loading="lazy"
-								class="hero-images"
-								aria-hidden="true"
-							/>
-						</div>
-						<div
-							class="slide hero w-slide"
-							aria-label="2 of 4"
-							role="group"
-							style="transition: all, transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86); transform: translateX(-1732.5px); opacity: 0;"
-							aria-hidden="true"
-						>
-							<img
-								sizes="(max-width: 1200px) 100vw, 1200px"
-								srcset="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c88c5b413f2760422c_Serene%20Lakeside%20Modern%20Architecture-p-500.png 500w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c88c5b413f2760422c_Serene%20Lakeside%20Modern%20Architecture-p-800.png 800w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c88c5b413f2760422c_Serene%20Lakeside%20Modern%20Architecture-p-1080.png 1080w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c88c5b413f2760422c_Serene%20Lakeside%20Modern%20Architecture.png 1200w"
-								alt="Villa Modern"
-								src="./assets/68c220c88c5b413f2760422c_Serene Lakeside Modern Architecture.png"
-								loading="lazy"
-								class="hero-images"
-								aria-hidden="true"
-							/>
-						</div>
-						<div
-							class="slide hero w-slide"
-							aria-label="3 of 4"
-							role="group"
-							style="transition: all, transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86); transform: translateX(-1732.5px); opacity: 0;"
-							aria-hidden="true"
-						>
-							<img
-								sizes="(max-width: 1200px) 100vw, 1200px"
-								srcset="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8415b9633e09a530c_Modern%20Lakefront%20Retreat-p-500.png 500w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8415b9633e09a530c_Modern%20Lakefront%20Retreat-p-800.png 800w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8415b9633e09a530c_Modern%20Lakefront%20Retreat-p-1080.png 1080w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c8415b9633e09a530c_Modern%20Lakefront%20Retreat.png 1200w"
-								alt="Villa Modern"
-								src="./assets/68c220c8415b9633e09a530c_Modern Lakefront Retreat.png"
-								loading="lazy"
-								class="hero-images"
-								aria-hidden="true"
-							/>
-						</div>
-						<div
-							class="slide hero w-slide"
-							aria-label="4 of 4"
-							role="group"
-							style="transition: all, transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86); transform: translateX(-1732.5px); opacity: 0;"
-						>
-							<img
-								sizes="(max-width: 1200px) 100vw, 1200px"
-								srcset="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c80145874386ad8b82_Modern%20Glass-Walled%20House%20on%20Rocky%20Island-p-500.png 500w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c80145874386ad8b82_Modern%20Glass-Walled%20House%20on%20Rocky%20Island-p-800.png 800w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c80145874386ad8b82_Modern%20Glass-Walled%20House%20on%20Rocky%20Island-p-1080.png 1080w, https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c220c80145874386ad8b82_Modern%20Glass-Walled%20House%20on%20Rocky%20Island.png 1200w"
-								alt="Villa Modern"
-								src="./assets/68c220c80145874386ad8b82_Modern Glass-Walled House on Rocky Island.png"
-								loading="lazy"
-								class="hero-images"
-							/>
-						</div>
-						<div
-							aria-live="off"
-							aria-atomic="true"
-							class="w-slider-aria-label"
-							data-wf-ignore=""
-						>
-							Slide 4 of 4.
-						</div>
-					</div>
-					<div
-						class="w-slider-arrow-left"
-						role="button"
-						tabindex="0"
-						aria-controls="w-slider-mask-0"
-						aria-label="previous slide"
-					>
-					</div>
-					<div
-						class="w-slider-arrow-right"
-						role="button"
-						tabindex="0"
-						aria-controls="w-slider-mask-0"
-						aria-label="next slide"
-					>
-					</div>
-					<div class="slide-nav w-slider-nav w-shadow w-round">
-						<div
-							class="w-slider-dot"
-							data-wf-ignore=""
-							aria-label="Show slide 1 of 4"
-							aria-pressed="false"
-							role="button"
-							tabindex="-1"
-							style="margin-left: 3px; margin-right: 3px;"
-						>
-						</div>
-						<div
-							class="w-slider-dot"
-							data-wf-ignore=""
-							aria-label="Show slide 2 of 4"
-							aria-pressed="false"
-							role="button"
-							tabindex="-1"
-							style="margin-left: 3px; margin-right: 3px;"
-						>
-						</div>
-						<div
-							class="w-slider-dot"
-							data-wf-ignore=""
-							aria-label="Show slide 3 of 4"
-							aria-pressed="false"
-							role="button"
-							tabindex="-1"
-							style="margin-left: 3px; margin-right: 3px;"
-						>
-						</div>
-						<div
-							class="w-slider-dot w-active"
-							data-wf-ignore=""
-							aria-label="Show slide 4 of 4"
-							aria-pressed="true"
-							role="button"
-							tabindex="0"
-							style="margin-left: 3px; margin-right: 3px;"
-						>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card features">
-				<div class="section-tittle left">
-					<div class="badge">
-						<div class="tittle-badge">Features</div>
-					</div>
-					<div class="text-content left">
-						<h3 class="heading-style-h3 left">The Fazen Difference</h3>
-						<p class="paragraph-large left">
-							Redefining luxury living through design, detail, and distinction.<br
-							/>
-						</p>
-					</div>
-				</div>
-				<div class="faq-list">
-					<div
-						data-w-id="bd01907d-e3c4-f230-dd37-1e9e35ded3ff"
-						class="faq-accordion"
-					>
-						<div class="faq-question">
-							<div class="sub-heading-large">Unparalleled Craftsmanship</div>
-							<div class="faq-icon">
-								<div class="icon w-embed">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 12 12"
-									>
-										<path
-											fill="#000"
-											d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
-										>
-										</path>
-									</svg>
-								</div>
-							</div>
-						</div>
-						<div style="width: 100%; height: 0px;" class="faq-answer">
-							<p class="paragraph-regular answer">
-								Fazen homes—crafted with precision, quality, and timeless
-								detail.
-							</p>
-						</div>
-					</div>
-					<div
-						data-w-id="bd01907d-e3c4-f230-dd37-1e9e35ded408"
-						class="faq-accordion"
-					>
-						<div class="faq-question">
-							<div class="sub-heading-large">Personalized Design</div>
-							<div class="faq-icon">
-								<div class="icon w-embed">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 12 12"
-									>
-										<path
-											fill="#000"
-											d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
-										>
-										</path>
-									</svg>
-								</div>
-							</div>
-						</div>
-						<div style="width: 100%; height: 0px;" class="faq-answer">
-							<p class="paragraph-regular answer">
-								Luxury Homes Crafted and Designed Around Your Lifestyle
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="column-features">
-					<div class="card highlights">
-						<img
-							width="45"
-							height="45"
-							alt=""
-							src="./assets/68c23585a391010f9cc22fae_proicons--location.svg"
-							loading="lazy"
-							class="icon"
-						/>
-						<div class="content highlights">
-							<div class="sub-heading-large left">Top Locations</div>
-							<p class="paragraph-regular left">
-								Properties in prime areas with key amenities.
-							</p>
-						</div>
-					</div>
-					<div class="card highlights">
-						<img
-							width="45"
-							height="45"
-							alt=""
-							src="./assets/68c235850fc5a4d2f6c601aa_hugeicons--real-estate-02.svg"
-							loading="lazy"
-							class="icon"
-						/>
-						<div class="content highlights">
-							<div class="sub-heading-large left">Elite Estates</div>
-							<p class="paragraph-regular left">
-								Upscale properties with luxury designs.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Slider />
+			<Features />
 		</div>
 	</Section>
 	<Section><Testimonials /></Section>

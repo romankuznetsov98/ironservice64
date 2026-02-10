@@ -14,10 +14,7 @@ const { services = [] } = Astro.props as IServiceListProps;
 		services.map((service) => (
 			<ServiceCard
 				title={service.title}
-				location={service.location}
-				bedrooms={service.bedrooms}
-				bathrooms={service.bathrooms}
-				price={service.price}
+				description={service.description}
 				imageUrl={service.imageUrl}
 				propertyUrl={service.propertyUrl}
 			/>

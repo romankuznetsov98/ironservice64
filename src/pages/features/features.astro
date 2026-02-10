@@ -1,0 +1,172 @@
+<div class="card features">
+    <div class="section-tittle left">
+        <div class="badge">
+            <div class="tittle-badge">Features</div>
+        </div>
+        <div class="text-content left">
+            <h3 class="heading-style-h3 left">Почему мы?</h3>
+            <p class="paragraph-large left">
+                Redefining luxury living through design, detail, and distinction.<br />
+            </p>
+        </div>
+    </div>
+    <div class="faq-list">
+        <!-- Аккордеон 1 -->
+        <details class="faq-accordion">
+            <summary class="faq-question">
+                <div class="sub-heading-large">Более 14 лет на рынке</div>
+                <div class="faq-icon">
+                    <div class="icon w-embed">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 12 12"
+                        >
+                            <path
+                                fill="#000"
+                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                            >
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </summary>
+            <div class="faq-answer">
+                <p class="paragraph-regular answer">
+                    Более 14 лет мы спасаем вашу бытовую технику от поломок.
+                     Холодильники, стиральные машины, газовые плиты и прочие веселые
+                      штуки живы благодаря мастерству и познаниям дзен наших мастеров (они джедаи паяльников).
+                       Заказывая услуги у нас, вы не рискуете ни своими деньгами, ни своей бытовой техникой.
+                        На все услуги мы предоставляем гарантию от 3-12 месяцев. 
+                        Чините свою технику и да прибудет с вами сила.
+                </p>
+            </div>
+        </details>
+        
+        <!-- Аккордеон 2 -->
+        <details class="faq-accordion">
+            <summary class="faq-question">
+                <div class="sub-heading-large">За что нас все любят?</div>
+                <div class="faq-icon">
+                    <div class="icon w-embed">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 12 12"
+                        >
+                            <path
+                                fill="#000"
+                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                            >
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </summary>
+            <div class="faq-answer">
+                <p class="paragraph-regular answer">
+                    В год мы выполняем более 700 ремонтных работ различного типа. 
+                    Начиная от поломки йогуртницы и заканчивая распайкой материнской платы компьютера. 
+                    Наши клиенты нам доверяют не за красивые глаза (хотя глаза у нас красивые. Мы все тут красивые), 
+                    а за профессионализм, качество и оперативность работы.
+                </p>
+            </div>
+        </details>
+    </div>
+    <div class="column-features">
+        <!-- <div class="card highlights">
+            <img
+                width="45"
+                height="45"
+                alt=""
+                src="./assets/68c23585a391010f9cc22fae_proicons--location.svg"
+                loading="lazy"
+                class="icon"
+            />
+            <div class="content highlights">
+                <div class="sub-heading-large left">Top Locations</div>
+                <p class="paragraph-regular left">
+                    Properties in prime areas with key amenities.
+                </p>
+            </div>
+        </div>
+        <div class="card highlights">
+            <img
+                width="45"
+                height="45"
+                alt=""
+                src="./assets/68c235850fc5a4d2f6c601aa_hugeicons--real-estate-02.svg"
+                loading="lazy"
+                class="icon"
+            />
+            <div class="content highlights">
+                <div class="sub-heading-large left">Elite Estates</div>
+                <p class="paragraph-regular left">
+                    Upscale properties with luxury designs.
+                </p>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<style>
+    details[open] .faq-icon svg {
+        transform: rotate(45deg) !important;
+    }
+
+    .faq-list{
+        position: absolute;
+        top: 200px;
+    }
+
+    .faq-question :hover{
+        cursor: pointer;
+    }
+
+    .card.features{
+        min-height: 590px;
+        position: relative;
+    }
+
+    .section-tittle.left{
+        position: absolute;
+        top: 40px;
+        left: 30px;
+    }
+
+    .faq-answer {
+        transition: max-height 0.7s ease, opacity 0.7s ease;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    
+    details[open] .faq-answer {
+        max-height: 500px;
+        opacity: 1;
+    }
+    
+    .faq-icon svg {
+        transition: transform 0.3s ease;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const allAccordions = document.querySelectorAll('details.faq-accordion') as NodeListOf<HTMLDetailsElement>
+        
+        allAccordions.forEach((accordion: HTMLDetailsElement) => {
+            accordion.addEventListener('toggle', () => {
+                if (accordion.open) {
+                    allAccordions.forEach((otherAccordion: HTMLDetailsElement) => {
+                        if (otherAccordion !== accordion && otherAccordion.open) {
+                            otherAccordion.open = false
+                        }
+                    })
+                }
+            });
+        })
+    })
+</script>
