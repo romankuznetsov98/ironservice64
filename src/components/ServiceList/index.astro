@@ -1,9 +1,9 @@
 ---
-import type { IServiceCardProps } from "../ServiceCard/index.astro";
+import type { IServiceItem } from "../../utils/types";
 import ServiceCard from "../ServiceCard/index.astro";
 
 interface IServiceListProps {
-	services: IServiceCardProps[];
+	services: IServiceItem[];
 }
 
 const { services = [] } = Astro.props as IServiceListProps;
@@ -15,6 +15,7 @@ const { services = [] } = Astro.props as IServiceListProps;
 			<ServiceCard
 				title={service.title}
 				description={service.description}
+				price={service.price}
 				imageUrl={service.imageUrl}
 				propertyUrl={service.propertyUrl}
 			/>

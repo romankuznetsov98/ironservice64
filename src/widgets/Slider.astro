@@ -27,7 +27,7 @@
                 <img
                     sizes="(max-width: 991px) 100vw, 992px"
                     alt="Villa Modern"
-                    src="/public/image/services/whyus1.jpg"
+                    src="/image/slider/whyus5.jpg"
                     loading="lazy"
                     class="hero-images"
                     aria-hidden="true"
@@ -43,7 +43,7 @@
                 <img
                     sizes="(max-width: 1200px) 100vw, 1200px"
                     alt="Villa Modern"
-                    src="/public/image/services/whyus2.png"
+                    src="/image/slider/whyus2.png"
                     loading="lazy"
                     class="hero-images"
                     aria-hidden="true"
@@ -59,7 +59,7 @@
                 <img
                     sizes="(max-width: 1200px) 100vw, 1200px"
                     alt="Villa Modern"
-                    src="/public/image/services/whyus3.jpg"
+                    src="/image/slider/whyus3.jpg"
                     loading="lazy"
                     class="hero-images"
                     aria-hidden="true"
@@ -74,7 +74,7 @@
                 <img
                     sizes="(max-width: 1200px) 100vw, 1200px"
                     alt="Villa Modern"
-                    src="/public/image/services/whyus4.jpg"
+                    src="/image/slider/whyus4.jpg"
                     loading="lazy"
                     class="hero-images"
                 />
@@ -148,3 +148,125 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.querySelector('.w-slider');
+  if (!slider) return;
+  
+  const mask = slider.querySelector('.w-slider-mask');
+  const slides = slider.querySelectorAll('.w-slide');
+  const dots = slider.querySelectorAll('.w-slider-dot');
+  const prevBtn = slider.querySelector('.w-slider-arrow-left');
+  const nextBtn = slider.querySelector('.w-slider-arrow-right');
+  
+  if (!mask || !slides.length || !dots.length || !prevBtn || !nextBtn) return;
+  
+  let currentIndex: number = 0;
+  const slideCount: number = slides.length;
+  let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
+  const autoPlayDelay: number = 3500;
+  
+  // Функция обновления слайдера
+  const updateSlider = (index: number): void => {
+    if (index < 0) index = slideCount - 1;
+    if (index >= slideCount) index = 0;
+    
+    currentIndex = index;
+    
+    // Сдвиг слайдов
+    const offset: number = -currentIndex * 100;
+    slides.forEach((slide: Element) => {
+      (slide as HTMLElement).style.transform = `translateX(${offset}%)`;
+      (slide as HTMLElement).style.opacity = '1';
+      (slide as HTMLElement).style.transition = 'transform 500ms cubic-bezier(0.785, 0.135, 0.15, 0.86)';
+    });
+    
+    // Обновление точек
+    dots.forEach((dot: Element, i: number) => {
+      if (i === currentIndex) {
+        dot.classList.add('w-active');
+        dot.setAttribute('aria-pressed', 'true');
+      } else {
+        dot.classList.remove('w-active');
+        dot.setAttribute('aria-pressed', 'false');
+      }
+    });
+    
+    // Обновление aria-label для маски
+    const ariaLabel = mask.querySelector('.w-slider-aria-label');
+    if (ariaLabel) {
+      ariaLabel.textContent = `Slide ${currentIndex + 1} of ${slideCount}.`;
+    }
+  };
+  
+  // Кнопки навигации
+  prevBtn.addEventListener('click', () => {
+    updateSlider(currentIndex - 1);
+    resetAutoPlay();
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    updateSlider(currentIndex + 1);
+    resetAutoPlay();
+  });
+  
+  // Точки навигации
+  dots.forEach((dot: Element, i: number) => {
+    dot.addEventListener('click', () => {
+      updateSlider(i);
+      resetAutoPlay();
+    });
+  });
+  
+  // Автоплей
+  const startAutoPlay = (): void => {
+    if (autoPlayInterval) clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(() => {
+      updateSlider(currentIndex + 1);
+    }, autoPlayDelay);
+  };
+  
+  const resetAutoPlay = (): void => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    }
+  };
+  
+  // Инициализация свайпов для мобильных
+  let touchStartX: number = 0;
+  let touchEndX: number = 0;
+  
+  // Исправлено: явное приведение типа Event к TouchEvent
+  mask.addEventListener('touchstart', (e: Event) => {
+    const touchEvent = e as TouchEvent;
+    touchStartX = touchEvent.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  mask.addEventListener('touchend', (e: Event) => {
+    const touchEvent = e as TouchEvent;
+    touchEndX = touchEvent.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+  
+  const handleSwipe = (): void => {
+    const swipeThreshold: number = 50;
+    if (touchEndX < touchStartX - swipeThreshold) {
+      updateSlider(currentIndex + 1);
+      resetAutoPlay();
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+      updateSlider(currentIndex - 1);
+      resetAutoPlay();
+    }
+  };
+
+  updateSlider(0);
+  startAutoPlay();
+  
+  window.addEventListener('beforeunload', () => {
+    if (autoPlayInterval) clearInterval(autoPlayInterval);
+  });
+});
+</script>

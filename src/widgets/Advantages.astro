@@ -1,0 +1,173 @@
+<div class="card features">
+    <div class="section-tittle left">
+        <div class="badge">
+            <div class="tittle-badge">Почему мы?</div>
+        </div>
+        <div class="text-content left">
+            <h3 class="heading-style-h3 left">Наши преимущества</h3>
+            <p class="paragraph-large left">
+                Опыт. Качество. Гарантия. — Надежность, проверенная временем<br />
+            </p>
+        </div>
+    </div>
+    <div class="faq-list">
+        <div class="faq-accordion">
+            <div class="faq-question" data-question>
+                <div class="sub-heading-large">Более 14 лет на рынке</div>
+                <div class="faq-icon">
+                    <div class="icon w-embed">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 12 12"
+                        >
+                            <path
+                                fill="#000"
+                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                            >
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer">
+                    <p class="paragraph-regular answer">
+                        Более 14 лет мы восстанавливаем работоспособность бытовой <br> техники — холодильников, стиральных машин,
+                        газовых плит и другого оборудования. Заказывая услуги в IronService, 
+                        вы не рискуете ни деньгами, ни техникой. 
+                        На все работы предоставляется гарантия от 3 до 12 месяцев.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-accordion">
+            <div class="faq-question" data-question>
+                <div class="sub-heading-large">За что нас все любят?</div>
+                <div class="faq-icon">
+                    <div class="icon w-embed">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 12 12"
+                        >
+                            <path
+                                fill="#000"
+                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                            >
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer">
+                    <p class="paragraph-regular answer">
+                        Ежегодно мы выполняем более 700 ремонтных работ различной 
+                        сложности — от бытовых приборов до компьютерной техники. 
+                        Клиенты доверяют нам за профессионализм, качество и оперативность.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column-features">
+       
+    </div>
+</div>
+
+<style>
+    .faq-list {
+        position: absolute;
+        top: 200px;
+        width: 100%;
+        padding: 0 30px;
+    }
+
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        cursor: pointer;
+        user-select: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-question:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-icon svg {
+        transition: transform 0.4s ease;
+    }
+
+    .faq-accordion.active .faq-icon svg {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-accordion.active .faq-answer-wrapper {
+        max-height: 500px; 
+        transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-answer {
+        padding: 0 0 20px 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .faq-accordion.active .faq-answer {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+    }
+
+    .card.features {
+        min-height: 590px;
+        position: relative;
+    }
+
+    .section-tittle.left {
+        position: absolute;
+        top: 40px;
+        left: 30px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const questions = document.querySelectorAll('[data-question]');
+        
+        questions.forEach(question => {
+            question.addEventListener('click', () => {
+                const accordion = question.closest('.faq-accordion');
+                if (!accordion) return;
+                
+                const wasActive = accordion.classList.contains('active');
+                
+                document.querySelectorAll('.faq-accordion.active').forEach(activeAccordion => {
+                    if (activeAccordion !== accordion) {
+                        activeAccordion.classList.remove('active');
+                    }
+                });
+                
+                if (wasActive) {
+                    accordion.classList.remove('active');
+                } else {
+                    accordion.classList.add('active');
+                }
+            });
+        });
+    });
+</script>

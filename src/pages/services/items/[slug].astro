@@ -1,0 +1,37 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout/index.astro";
+import ServicePageCard from "../../../widgets/ServicePageCard.astro";
+import type { IPageData, IServiceItem, IServiceCategory } from "../../../utils/types";
+
+
+export async function getStaticPaths() {
+  const page = await getEntry("pages", "services");
+  if (!page) throw new Error("Services page not found");
+  
+  const { services } = page.data as IPageData;
+  const paths: {
+    params: { slug: string };
+    props: { item: IServiceItem; category: IServiceCategory };
+  }[] = [];
+  
+  services.forEach((category) => {
+    category.items.forEach((item) => {
+      const slug = item.propertyUrl.split('/').pop() || '';
+      
+      paths.push({
+        params: { slug },
+        props: { item, category }
+      });
+    });
+  });
+  
+  return paths;
+}
+
+const { item, category } = Astro.props;
+---
+
+<BaseLayout title={`${item.title} | Сервисный центр`}>
+    <ServicePageCard item={item} category={category} />
+</BaseLayout>

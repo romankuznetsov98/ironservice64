@@ -1,12 +1,14 @@
 ---
 export interface ISectionHeaderProps {
-    badgeText: string;
+    haveButton: boolean;
     heading: string;
     paragraph: string;
+    pathUrl: string;
 }
 
 const {
-    badgeText = "Premium Estates",
+    haveButton = false,
+    pathUrl = "/",
     heading = "Discover homes designed to inspire.",
     paragraph = "Luxury residences where design meets comfort",
 } = Astro.props as ISectionHeaderProps;
@@ -17,10 +19,18 @@ const {
     
     class="section-tittle"
 >
-    <div class="badge two">
-        <div class="tittle-badge">{badgeText}</div>
-    </div>
+    {haveButton && (
+        <a href={pathUrl} class="helper link w-inline-block" id="back-button" >
+            <div class="icon-2 w-embed">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#000" d="M11.03 8.53a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06l-2.72-2.72H18a.75.75 0 0 0 0-1.5H8.31z"/>
+                </svg>
+            </div>
+            <div class="title-badge">Вернуться</div>
+        </a>
+    )}
     <div class="text-content">
+        
         <h2 class="heading-style-h2 center">
             {heading}
         </h2>

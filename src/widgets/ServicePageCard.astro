@@ -1,0 +1,58 @@
+---
+import type { IServiceItem, IServiceCategory } from "../utils/types";
+
+interface Props {
+  item: IServiceItem;
+  category: IServiceCategory;
+}
+
+const { item, category } = Astro.props;
+---
+
+<main id="Hero" class="section top">
+    <div class="padding-global">
+        <div class="container-medium">
+            <div data-w-id="20edfcf6-67bf-dec8-13c3-531f3d0236db" style="opacity:1;-webkit-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="wrapper-cms">
+                <div class="column-cms-nav">
+                    <a href={category.propertyUrl} class="helper link w-inline-block" id="back-button">
+                        <div class="icon-2 w-embed">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="#000" d="M11.03 8.53a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06l-2.72-2.72H18a.75.75 0 0 0 0-1.5H8.31z"/>
+                            </svg>
+                        </div>
+                        <div class="title-badge">Вернуться</div>
+                    </a>
+                    <div class="badge">
+                        <img loading="lazy" src="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c23585a391010f9cc22fae_proicons--location.svg" alt="" class="icon"/>
+                        <div class="tittle-badge">Саратов, Энгельс</div>
+                    </div>
+                </div>
+                <div class="section-tittle left">
+                    <div class="text-content left">
+                        <h1 class="heading-style-h1 left">{item.title}</h1>
+                        <p class="paragraph-large left">{category.title}</p>
+                    </div>
+                    <div class="column-cms-nav">
+                        <div class="content-properties list">
+                            <div class="badge">
+                                <img loading="lazy" src="/icons/parchment.png" alt="" class="icon"/>
+                                <div class="tittle-badge">Опешите проблему и оставьте заявку</div>
+                            </div>
+                        </div>
+                        <div class="badge two">
+                            <div class="sub-heading-large">от</div>
+                            <div class="sub-heading-large">{item.price}₽</div>
+                        </div>
+                    </div>
+                </div>
+                <img style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" data-w-id="aa8f6877-1c14-7058-d4ee-5c7d0ded6a80" alt={item.title} src={item.imageUrl} loading="lazy" class="tumbnail preview"/>
+                <div class="rich-text w-richtext">
+                    <p>{item.description}</p>
+                </div>
+                <a data-w-id="ea84d01c-ab2e-9168-935f-62025977c07b" href="/contact" class="button w-button">Оставить заявку</a>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- <img loading="lazy" src="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0edb35744eedad4a4e402_6896bc17afb8a1037cd9e3a9_Serene%2520Modern%2520Interior%2520with%2520Green%2520Lounge%2520Chair.png" alt="Minimal Room Modern" class="tumbnail banner"/> -->
+ <img loading="lazy" src="/image/services/default_header.jpg" alt="Minimal Room Modern" class="tumbnail banner"/>
