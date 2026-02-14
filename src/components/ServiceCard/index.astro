@@ -1,51 +1,31 @@
 ---
-export interface IServiceCardProps {
-  title: string;
-  description: string;
-  imageUrl: string;
-  propertyUrl: string;
-}
-
+import type { IServiceItem  } from "../../utils/types" 
 const {
-  title = "Urban Elegance",
-  description = "Ремонт",
-  imageUrl = "./assets/68c0f540a40a075623084298_Modern Coastal Retreat.png",
-  propertyUrl = "https://fazora.webflow.io/properties/urban-elegance",
-} = Astro.props as IServiceCardProps;
+  title,
+  description,
+  price,
+  imageUrl,
+  propertyUrl,
+} = Astro.props as IServiceItem;
 ---
 
-<div role="listitem" class="item w-dyn-item">
+<!-- <div role="listitem" class="item w-dyn-item">
   <a href={propertyUrl} class="card-cms properties w-inline-block">
     <div class="tumbnail-wrapper">
       <div class="content-cms _2">
         <div class="column-wrapper-cms">
-          <!-- <img
+          <img
             width="45"
             height="45"
             alt=""
-            src="./assets/68c0f238ec1660243de7e8f4_mingcute--location-line.svg"
+            src="/icons/locations.svg"
             loading="lazy"
             class="icon"
-          /> -->
-          <!-- <div class="title-badge cms-card">{location}</div> -->
-        </div>
-        <div class="column-wrapper-cms avabilty">
-          <!-- <div class="badge mini">
-            <div class="title-badge">{bedrooms}</div>
-            <div class="title-badge">Bedroom</div>
-          </div>
-          <div class="badge mini">
-            <div class="title-badge">{bathrooms}</div>
-            <div class="title-badge">Bathroom</div>
-          </div> -->
+          />
         </div>
       </div>
       <div class="content-cms">
         <div class="sub-heading-regular cms">{title}</div>
-        <!-- <div class="column-wrapper-cms">
-          <div class="sub-heading-regular price">$</div>
-          <div class="sub-heading-regular price">{price}</div>
-        </div> -->
       </div>
       <img
         style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
@@ -55,8 +35,6 @@ const {
         sizes="100vw"
         class="tumbnail properties"
       />
-      
-      <!-- Тута описание карточки -->
       <div class="description-overlay">
         <div class="description-content">
           <p class="description-text">{description}</p>
@@ -78,9 +56,9 @@ const {
       </div>
     </div>
   </a>
-</div>
+</div> -->
 
-<style>
+<!-- <style>
     .card-cms.properties {
         display: block;
         position: relative;
@@ -102,6 +80,11 @@ const {
         height: 300px;
         object-fit: cover;
         transition: transform 0.3s ease;
+    }
+
+    .content-cms_2 {
+      position: absolute;
+      top: 0px;
     }
     
     .content-cms {
@@ -184,4 +167,78 @@ const {
       color: transparent; 
       text-shadow: none;
     }
-</style>
+</style> -->
+
+<div role="listitem" class="item w-dyn-item">
+  <a data-w-id="d6bdcc75-a34d-8d32-0b2b-9c2af3c83756" href={propertyUrl} class="card-cms properties w-inline-block">
+      <div class="tumbnail-wrapper">
+          <div class="content-cms _2">
+              <div class="column-wrapper-cms">
+                  <img width="45" height="45" alt="" src="/icons/locations.svg" loading="lazy" class="icon"/>
+                  <div class="title-badge cms-card">Саратов, Энгельс</div>
+              </div>
+              <div class="column-wrapper-cms avabilty">
+                  <!-- <div class="badge mini">
+                      <div class="title-badge">2</div>
+                      <div class="title-badge">Bedroom</div>
+                  </div>
+                  <div class="badge mini">
+                      <div class="title-badge">2</div>
+                      <div class="title-badge">Bathroom</div>
+                  </div> -->
+              </div>
+          </div>
+          <div class="content-cms">
+              <div class="sub-heading-regular cms">{title}</div>
+              {price && (
+                <div class="column-wrapper-cms">
+                    <div class="sub-heading-regular price">от</div>
+                    <div class="sub-heading-regular price">{price}₽</div>
+                </div>
+              )}
+          </div>
+          <img src={imageUrl} loading="lazy" alt="Tumbnail" sizes="100vw" class="tumbnail properties _2"/>
+          <div style="display:none;-webkit-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0) " class="icon-wrapper popup">
+              <img width="45" height="45" alt="" src="/icons/right-up.png" loading="lazy" class="icon"/>
+          </div>
+      </div>
+  </a>
+</div>
+
+<script>
+  // Ждем загрузки DOM
+  document.addEventListener('DOMContentLoaded', function() {
+    // Находим все карточки
+    const cards = document.querySelectorAll('.card-cms.properties');
+    
+    cards.forEach(card => {
+      // Для каждой карточки находим нужные элементы внутри неё
+      const thumbnail = card.querySelector('.tumbnail.properties._2');
+      const iconWrapper = card.querySelector('.icon-wrapper.popup');
+      
+      // Проверяем, что оба элемента существуют и являются HTMLElement
+      if (thumbnail instanceof HTMLElement && iconWrapper instanceof HTMLElement) {
+        
+        // При наведении на карточку
+        card.addEventListener('mouseenter', function() {
+          // Показываем иконку
+          iconWrapper.style.display = 'flex';
+          
+          // Приближаем фото
+          thumbnail.style.transform = 'scale(1.1)';
+          thumbnail.style.transition = 'transform 0.9s ease';
+        });
+        
+        // Когда убираем курсор с карточки
+        card.addEventListener('mouseleave', function() {
+          // Скрываем иконку
+          iconWrapper.style.display = 'none';
+          
+          // Возвращаем фото в исходный размер
+          thumbnail.style.transform = 'scale(1)';
+        });
+        
+      }
+    });
+  });
+</script>

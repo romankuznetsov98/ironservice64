@@ -1,18 +1,15 @@
 ---
 import { getEntry } from "astro:content";
-import Header from "../components/Header/index.astro";
 import BaseLayout from "../layouts/BaseLayout/index.astro";
 import MainBlock from "../components/MainBlock/index.astro";
 import Section from "../components/Section/index.astro";
-import Card from "../components/Card/index.astro";
 import SectionHeader from "../components/SectionHeader/index.astro";
 import ServiceList from "../components/ServiceList/index.astro";
-import Footer from "../components/Footer/index.astro";
-import ContactForm from "../components/ContactForm/index.astro";
+
 import Testimonials from "../components/Testimonials/index.astro";
 
-import Slider from "./features/slider.astro"
-import Features from "./features/features.astro"
+import Slider from "../widgets/Slider.astro";
+import Advantages from "../widgets/Advantages.astro";
 
 const page = await getEntry("pages", "index");
 if (!page) throw new Error("Home page not found");
@@ -21,12 +18,11 @@ const { title, description, image, advantages, seo } = page.data;
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-	<Header slot="header" />
 	<MainBlock
 		badgeText="Лучший сервис по ремонту бытовой техники"
 		description={description}
 		ctaText="Оставить заявку"
-		ctaHref="/"
+		ctaHref="/contact"
 		heading="Iron Service - надежный партнер в ремонте бытовой техники"
 		mainBackgroundImage={image}
 		property={{
@@ -34,23 +30,8 @@ const { title, description, image, advantages, seo } = page.data;
 			image: "/hero/service2.jpg",
 			title: "Наши услуги",
 			location: "Саратов",
-			// price: "от 1500 руб.",
 		}}
 	/>
-	<!-- <Section>
-		<div class="grid-highlights">
-			{
-				advantages.map((service: any) => (
-					<Card
-						class="highlights"
-						icon={service.icon}
-						title={service.title}
-						description={service.description}
-					/>
-				))
-			}
-		</div>
-	</Section> -->
 	<Section>
 		<SectionHeader
 			badgeText="Наши услуги"
@@ -64,25 +45,25 @@ const { title, description, image, advantages, seo } = page.data;
 						title: "Ремонт бытовой техники",
 						description: "Полный спектр услуг по ремонту всех бытовых приборов -- от мелочей до сложной электроники",
 						imageUrl: "/hero/repair1.jpg",
-						propertyUrl: "#",
+						propertyUrl: "/services/household",
 					},
 					{
 						title: "Ремонт компьютерной техники",
-						description: "От профилактики до сложного ремонта: заботимся о вашей технике. Всё что с кнопками и экранами: реанимируем, чиним, настраиваем",
+						description: "Диагностика и восстановление ПК, ноутбуков и периферии — любой сложности и любого производителя.",
 						imageUrl: "/hero/repair2.jpg",
-						propertyUrl: "#",
+						propertyUrl: "/services/computer",
 					},
 					{
 						title: "Ремонт климатической техники",
-						description: "Grand Harbor",
+						description: "Профессиональный сервис для систем, создающих ваш комфорт — от кондиционеров до вентиляции.",
 						imageUrl: "/hero/repair3.jpg",
-						propertyUrl: "#",
+						propertyUrl: "/services/climatic",
 					},
 					{
 						title: "Ремонт охранных систем",
-						description: "Grand Harbor",
+						description: "Квалифицированное обслуживание видеонаблюдения, сигнализаций и систем контроля доступа.",
 						imageUrl: "/hero/repair4.jpg",
-						propertyUrl: "#",
+						propertyUrl: "/services/security",
 					},
 				]}
 			/>
@@ -93,10 +74,10 @@ const { title, description, image, advantages, seo } = page.data;
 			class="button w-button">Все услуги</a
 		>
 	</Section>
+	<div id="about-section"></div>
 	<Section>
 		<SectionHeader
-			badgeText="Почему мы"
-			heading="Более 14 лет на рынке"
+			heading="О КОМПАНИИ"
 			paragraph="Выезд на ремонт крупной бытовой техники ежедневно. Работаем по Саратову и Энгельсу."
 		/>
 		<div
@@ -105,10 +86,11 @@ const { title, description, image, advantages, seo } = page.data;
 			class="grid _2"
 		>
 			<Slider />
-			<Features />
+			<Advantages />
 		</div>
 	</Section>
-	<Section><Testimonials /></Section>
-	<Section><ContactForm /></Section>
-	<Footer slot="footer" />
+	<Section>
+		<Testimonials />
+	</Section>
+	
 </BaseLayout>

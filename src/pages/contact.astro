@@ -1,0 +1,29 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout/index.astro";
+import FormApplication from "../widgets/FormApplication.astro"
+import Section from "../components/Section/index.astro";
+import Map from "../widgets/Map.astro"
+import SectionHeader from "../components/SectionHeader/index.astro"
+import ContactList from "../widgets/ContactList.astro"
+
+const page = await getEntry("pages", "contact");
+if (!page) throw new Error("Home page not found");
+
+const { title, description, image, advantages, seo } = page.data;
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+     <main class="section top">
+            <div class="padding-global">
+                <FormApplication />
+            </div>
+        </main>
+        <Section>
+            <SectionHeader heading="Мы на карте" paragraph="Легко найти — удобно сдать технику"/>
+            <Map />
+        </Section>
+        <Section>
+            <ContactList />
+        </Section>
+</BaseLayout>

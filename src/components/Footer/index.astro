@@ -6,9 +6,9 @@ interface IFooterProps {
 }
 
 const {
-  logoSrc = "./assets/68c14df658719eec11f94f7c_f36d154610edc7248bfe8b21b1fd953a_Logo (4).svg",
+  logoSrc = "/logo2.png",
   logoAlt = "Footer Logo",
-  description = "Find your perfect stay by selecting destination, dates, and guests.",
+  description = "Компания IronService предоставляет услуги ремонта бытовой техники любой сложности. Мы работаем во всех районах Саратова и Энгельса, как в сервисе, так и на доме. Огромнейший опыт работы, высокая квалификация мастеров и качество работы. Оставляйте заявку на ремонт бытовой техники, и уже завтра, вы забудете про сломанную технику. Стоимость работ указана без учета стоимости запчастей. Сайт носит информационный характер.",
 } = Astro.props as IFooterProps;
 ---
 
@@ -34,7 +34,7 @@ const {
                 {description}
               </p>
               <p class="paragraph-regular left content-footer">
-                © Fazen, All rights reserved 2025
+                © IronService, 2026 
               </p>
             </div>
             <div class="container-menu"></div>
@@ -42,25 +42,45 @@ const {
           <div class="container-menu-footer">
             <div class="menu">
               <div class="sub-menu">
-                <div class="sub-heading-regular white">Pages</div>
+                <div class="sub-heading-regular white">Страницы</div>
               </div><a
-                href="https://fazora.webflow.io/properties"
-                class="navbar-link footer">Properties</a
+                href="/"
+                class="navbar-link footer">Главная</a
               ><a
-                href="https://fazora.webflow.io/blog"
-                class="navbar-link footer">Blog</a
+                href="/services"
+                class="navbar-link footer">Услуги</a
+              >
+              <a
+                href="/#about-section"
+                class="navbar-link footer">О Компании</a
+              ><a
+                href="/contact"
+                class="navbar-link footer">Контакты</a
               >
             </div>
-            <div class="menu">
+            <div style="margin-left: 40px;" class="menu">
               <div class="sub-menu">
-                <div class="sub-heading-regular white">Informations</div>
-              </div><a
-                href="https://fazora.webflow.io/templates-info/license"
-                class="navbar-link footer">License</a
-              ><a
-                href="https://fazora.webflow.io/templates-info/changelog"
-                class="navbar-link footer">Changelog</a
-              >
+                <div class="sub-heading-regular white">КОНТАКТЫ</div>
+              </div>
+
+              <p class="paragraph-regular right content-footer">
+                Адрес:	410015, г. Саратов ул. Орджоникидзе д. 2Г
+              </p>
+              
+              <p class="paragraph-regular right content-footer">
+                ОГРНИП:	304645420500028 <br>
+                ИНН:	645407974287
+              </p>
+              
+              <p class="paragraph-regular right content-footer">
+                Телефон:	<br>
+                +7 (8452) 70-97-97 <br>
+                +7 (902) 040-97-97 <br>
+                +7 (8452) 59-75-94 <br>
+                +7 (902) 040-79-94
+              </p>
+              <p class="paragraph-regular right content-footer">E-mail:	ironservices@yandex.ru</p>
+
             </div>
           </div>
         </div>

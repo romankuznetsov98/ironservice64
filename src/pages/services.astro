@@ -1,146 +1,22 @@
 ---
 import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout/index.astro";
-import Header from "../components/Header/index.astro";
-import MainBlock from "../components/MainBlock/index.astro";
-import Section from "../components/Section/index.astro";
-import SectionHeader from "../components/SectionHeader/index.astro";
+import SectionTop from "../components/SectionTop/index.astro";
+import SectionHeader from "../components/SectionHeader/index.astro"
 import ServiceList from "../components/ServiceList/index.astro";
-
-interface IPageDataProps {
-    seo: ISeoProps;
-    services: IServiceDataProps[];
-}
-
-interface ISeoProps {
-    title: string;
-    description: string;
-    ogImage: string;
-}
-
-interface IServiceDataProps {
-  title: string;
-  description: string;
-  items: IItemsProps[]
-}
-
-interface IItemsProps {
-    title: string;
-    description: string;
-    imageUrl: string;
-    propertyUrl: string;
-}
+import type { IPageDataProps } from "../utils/types";
 
 
 const page = await getEntry("pages", "services");
 if (!page) throw new Error("Home page not found");
 
-const {services, seo } = page.data as IPageDataProps;
+const {title, description, services, seo } = page.data as IPageDataProps;
 
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-    <Header slot="header" />
-    <!-- <MainBlock
-        badgeText="Лучший сервис по ремонту бытовой техники"
-        description={description}
-        ctaText="Оставить заявку"
-        ctaHref="/"
-        heading="Iron Service - надежный партнер в ремонте бытовой техники"
-        mainBackgroundImage={image}
-        property={{
-            href: "/",
-            image: "/hero/service2.jpg",
-            title: "Наши услуги",
-            location: "Саратов",
-            // price: "от 1500 руб.",
-        }}
-    /> -->
-    
-    <Section>
-        <h1>Услуги</h1>
-        {services.map((category) => (
-            <details class="service-category">
-                <summary class="service-category-header">
-                    <h2>{category.title}</h2>
-                    <div class="service-category-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M7 10l5 5 5-5z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                </summary>
-                <div class="service-category-content">
-                    <p>{category.description}</p>
-                    <ServiceList services={category.items}/>
-                </div>
-            </details>
-        ))}
-    </Section>
-    
+    <SectionTop>
+        <SectionHeader heading={title} paragraph={description}/>
+        <ServiceList services={services} />
+    </SectionTop>
 </BaseLayout>
-
-<!-- <style>
-    .service-category {
-        background-color: var(--_color-guide---global-style--base-card);
-        border-radius: 16px;
-        margin-bottom: 16px;
-        overflow: hidden;
-        /* border: 1px solid rgba(0,0,0,0.1); */
-        width: 100%;
-    }
-    
-    .service-category-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 24px;
-        cursor: pointer;
-        list-style: none;
-        font-size: 1.25rem;
-        font-weight: 600;
-    }
-    
-    .service-category-header h2 {
-        margin: 0;
-        font-size: inherit;
-        font-weight: inherit;
-    }
-    
-    .service-category-header::-webkit-details-marker {
-        display: none;
-    }
-    
-    .service-category-icon svg {
-        transition: transform 0.3s ease;
-    }
-    
-    .service-category[open] .service-category-icon svg {
-        transform: rotate(180deg);
-    }
-    
-    .service-category-content {
-        padding: 0 24px 24px;
-        /* border-top: 1px solid rgba(0,0,0,0.1); */
-        margin-top: -1px;
-    }
-    
-    .service-category-content {
-        animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* Ховер эффект */
-    .service-category-header:hover {
-        background-color: rgba(0,0,0,0.02);
-    }
-</style> -->
