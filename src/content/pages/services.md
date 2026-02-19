@@ -203,7 +203,7 @@ services:
     
 
 
-  - title: Ремонт компьютерной техники
+  - title: Ремонт компьютерной и цифровой техники техники
     description: Диагностика и восстановление ПК, ноутбуков и периферии — любой сложности и любого производителя.
     imageUrl: /image/services/computer.jpg
     propertyUrl: /services/computer
