@@ -2,11 +2,7 @@
 
 ---
 
-<div
-    data-w-id="f4600ab5-d97a-2694-6715-964321832aa0"
-    style="opacity:1;-webkit-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-    class="container-medium"
->
+<div class="container-medium">
     <div class="section-tittle center">
         <div class="badge two">
             <div class="tittle-badge">Контакты</div>
@@ -36,10 +32,10 @@
                         maxlength="256"
                         name="Contact-Form-Name-2"
                         data-name="Contact Form Name 2"
-                        placeholder="Андрей"
+                        placeholder="ФИО"
                         type="text"
                         id="Contact-Form-Name-2"
-                        required=""
+                        required
                     />
                 </div>
                 <div class="form-column">
@@ -49,12 +45,12 @@
                     <input
                         class="text-field w-input"
                         maxlength="256"
-                        name="Mail"
-                        data-name="Mail"
-                        placeholder="89997776655"
+                        name="phone"
+                        data-name="phone"
+                        placeholder="+7 (___) ___-__-__"
                         type="tel"
-                        id="Mail"
-                        required=""
+                        id="phone"
+                        required
                     />
                 </div>
             </div>
@@ -82,6 +78,13 @@
                 Пожалуйста, описывайте проблему максимально подробно — это
                 поможет мастеру подготовить нужные запчасти и инструменты.<br />
             </div>
+            <div
+                style="height: 100px"
+                id="captcha-container"
+                class="smart-captcha"
+                data-sitekey="ysc1_WmTJs7BjeMgfTCnfjNA87HagUsNtZJHXct1KAG1g325f683d"
+            >
+            </div>
         </form>
         <div class="success-message w-form-done">
             <div class="paragraph-regular">Спасибо! Ваша заявка получена!</div>
@@ -93,3 +96,31 @@
         </div>
     </div>
 </div>
+
+<script is:inline>
+    const input = document.getElementById("phone");
+
+    let isDeleting = false;
+
+    input.addEventListener("keydown", (e) => {
+        isDeleting = e.key === "Backspace" || e.key === "Delete";
+    });
+
+    input.addEventListener("input", (e) => {
+        if (isDeleting) return;
+
+        let digits = e.target.value.replace(/\D/g, "");
+
+        if (digits.startsWith("8")) digits = "7" + digits.slice(1);
+        if (!digits.startsWith("7")) digits = "7" + digits;
+
+        let v = "+7";
+
+        if (digits.length > 1) v += " (" + digits.slice(1, 4);
+        if (digits.length >= 4) v += ") " + digits.slice(4, 7);
+        if (digits.length >= 7) v += "-" + digits.slice(7, 9);
+        if (digits.length >= 9) v += "-" + digits.slice(9, 11);
+
+        e.target.value = v;
+    });
+</script>

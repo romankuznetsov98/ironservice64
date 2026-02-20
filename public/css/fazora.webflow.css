@@ -3811,7 +3811,7 @@ blockquote {
 .logo {
   color: var(--_color-guide---global-style--title);
   border-radius: 0;
-  width: 70px;
+  width: 100px;
   height: auto;
   font-size: 20px;
   font-weight: 600;

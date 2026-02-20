@@ -1,99 +1,98 @@
 <div class="card features">
-    <div class="section-tittle left">
+    <div class="features-header">
         <div class="badge">
             <div class="tittle-badge">Почему мы?</div>
         </div>
-        <div class="text-content left">
-            <h3 class="heading-style-h3 left">Наши преимущества</h3>
-            <p class="paragraph-large left">
-                Опыт. Качество. Гарантия. — Надежность, проверенная временем<br />
-            </p>
-        </div>
+        <h3 class="heading-style-h3">Наши преимущества</h3>
+        <p class="paragraph-large">
+            Опыт. Качество. Гарантия. — Надежность, проверенная временем
+        </p>
     </div>
+
     <div class="faq-list">
         <div class="faq-accordion">
-            <div class="faq-question" data-question>
-                <div class="sub-heading-large">Более 14 лет на рынке</div>
-                <div class="faq-icon">
-                    <div class="icon w-embed">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 12 12"
-                        >
-                            <path
-                                fill="#000"
-                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
-                            >
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-answer-wrapper">
+            <button class="faq-question" type="button">
+                <span class="sub-heading-large">Более 14 лет на рынке</span>
+                <span class="faq-icon">
+                    <svg width="24" height="24" viewBox="0 0 12 12">
+                        <path
+                            fill="currentColor"
+                            d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                        ></path>
+                    </svg>
+                </span>
+            </button>
+
+            <div class="faq-panel">
                 <div class="faq-answer">
-                    <p class="paragraph-regular answer">
-                        Более 20 лет мы восстанавливаем работоспособность бытовой <br> техники — холодильников, стиральных машин,
-                        газовых плит и другого оборудования. Заказывая услуги в IronService, 
-                        вы не рискуете ни деньгами, ни техникой. 
-                        На все работы предоставляется гарантия от 3 до 12 месяцев.
+                    <p class="paragraph-regular">
+                        Более 14 лет мы восстанавливаем работоспособность
+                        бытовой техники — холодильников, стиральных машин,
+                        газовых плит и другого оборудования. Заказывая услуги в
+                        IronService, вы не рискуете ни деньгами, ни техникой. На
+                        все работы предоставляется гарантия от 3 до 12 месяцев.
                     </p>
                 </div>
             </div>
         </div>
-        
+
         <div class="faq-accordion">
-            <div class="faq-question" data-question>
-                <div class="sub-heading-large">За что нас все любят?</div>
-                <div class="faq-icon">
-                    <div class="icon w-embed">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 12 12"
-                        >
-                            <path
-                                fill="#000"
-                                d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
-                            >
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-answer-wrapper">
+            <button class="faq-question" type="button">
+                <span class="sub-heading-large">За что нас все любят?</span>
+                <span class="faq-icon">
+                    <svg width="24" height="24" viewBox="0 0 12 12">
+                        <path
+                            fill="currentColor"
+                            d="M6 2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 6 2"
+                        ></path>
+                    </svg>
+                </span>
+            </button>
+
+            <div class="faq-panel">
                 <div class="faq-answer">
-                    <p class="paragraph-regular answer">
-                        Ежегодно мы выполняем более 5000 ремонтных работ различной 
-                        сложности — от бытовых приборов до компьютерной техники. 
-                        Клиенты доверяют нам за профессионализм, качество и оперативность.
+                    <p class="paragraph-regular">
+                        Ежегодно мы выполняем более 5000 ремонтных работ
+                        различной сложности — от бытовых приборов до
+                        компьютерной техники. Клиенты доверяют нам за
+                        профессионализм, качество и оперативность.
                     </p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="column-features">
-       
     </div>
 </div>
 
 <style>
-    .faq-list {
-        position: absolute;
-        top: 200px;
-        width: 100%;
-        padding: 0 30px;
+    .card.features {
+        display: grid;
+        gap: 40px;
     }
 
+    /* header */
+    .features-header {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    /* faq list */
+    .faq-list {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* question */
     .faq-question {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 0;
+        padding: 16px;
+        background: none;
+        border: none;
         cursor: pointer;
-        user-select: none;
+        text-align: left;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
@@ -101,73 +100,60 @@
         background-color: rgba(0, 0, 0, 0.02);
     }
 
+    /* icon */
     .faq-icon svg {
-        transition: transform 0.4s ease;
+        transition: transform 0.3s ease;
     }
 
-    .faq-accordion.active .faq-icon svg {
+    .faq-accordion[data-open="true"] .faq-icon svg {
         transform: rotate(45deg);
     }
 
-    .faq-answer-wrapper {
-        max-height: 0;
+    /* panel animation WITHOUT max-height */
+    .faq-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 300ms ease;
+    }
+
+    .faq-panel > * {
         overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .faq-accordion.active .faq-answer-wrapper {
-        max-height: 500px; 
-        transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    .faq-accordion[data-open="true"] .faq-panel {
+        grid-template-rows: 1fr;
     }
 
+    /* answer */
     .faq-answer {
-        padding: 0 0 20px 0;
+        padding: 12px 16px 20px;
         opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
+        transform: translateY(-6px);
+        transition:
+            opacity 200ms ease,
+            transform 200ms ease;
     }
 
-    .faq-accordion.active .faq-answer {
+    .faq-accordion[data-open="true"] .faq-answer {
         opacity: 1;
         transform: translateY(0);
-        transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
-    }
-
-    .card.features {
-        min-height: 590px;
-        position: relative;
-    }
-
-    .section-tittle.left {
-        position: absolute;
-        top: 40px;
-        left: 30px;
     }
 </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const questions = document.querySelectorAll('[data-question]');
-        
-        questions.forEach(question => {
-            question.addEventListener('click', () => {
-                const accordion = question.closest('.faq-accordion');
-                if (!accordion) return;
-                
-                const wasActive = accordion.classList.contains('active');
-                
-                document.querySelectorAll('.faq-accordion.active').forEach(activeAccordion => {
-                    if (activeAccordion !== accordion) {
-                        activeAccordion.classList.remove('active');
-                    }
-                });
-                
-                if (wasActive) {
-                    accordion.classList.remove('active');
-                } else {
-                    accordion.classList.add('active');
-                }
-            });
+<script is:inline>
+    const accordions = document.querySelectorAll(".faq-accordion");
+
+    accordions.forEach((accordion) => {
+        const button = accordion.querySelector(".faq-question");
+
+        button.addEventListener("click", () => {
+            const isOpen = accordion.dataset.open === "true";
+
+            accordions.forEach((a) => delete a.dataset.open);
+
+            if (!isOpen) {
+                accordion.dataset.open = "true";
+            }
         });
     });
 </script>
