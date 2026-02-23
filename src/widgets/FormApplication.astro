@@ -66,6 +66,13 @@
                     placeholder="Ваша проблема..."
                     class="text-field message _2 w-input"></textarea>
             </div>
+            <div
+                style="height: 100px; width: 100%;"
+                id="captcha-container"
+                class="smart-captcha"
+                data-sitekey="ysc1_WmTJs7BjeMgfTCnfjNA87HagUsNtZJHXct1KAG1g325f683d"
+            >
+            </div>
             <div class="button-wrapper">
                 <input
                     type="submit"
@@ -78,13 +85,6 @@
                 Пожалуйста, описывайте проблему максимально подробно — это
                 поможет мастеру подготовить нужные запчасти и инструменты.<br />
             </div>
-            <div
-                style="height: 100px"
-                id="captcha-container"
-                class="smart-captcha"
-                data-sitekey="ysc1_WmTJs7BjeMgfTCnfjNA87HagUsNtZJHXct1KAG1g325f683d"
-            >
-            </div>
         </form>
         <div class="success-message w-form-done">
             <div class="paragraph-regular">Спасибо! Ваша заявка получена!</div>
@@ -96,6 +96,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    input[type="submit"]:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+</style>
 
 <script is:inline>
     const input = document.getElementById("phone");
@@ -122,5 +129,82 @@
         if (digits.length >= 9) v += "-" + digits.slice(9, 11);
 
         e.target.value = v;
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("email-form");
+        const submitBtn = form.querySelector('input[type="submit"]');
+        const requiredFields = form.querySelectorAll(
+            "input[required], textarea[required]",
+        );
+
+        const CAPTCHA_VALIDATE_URL =
+            "https://functions.yandexcloud.net/d4e939pp9u95f8katnq6";
+        let captchaValid = false;
+        let captchaToken = null;
+        let captchaChecking = false;
+
+        submitBtn.disabled = true;
+
+        function areFieldsFilled() {
+            return Array.from(requiredFields).every(
+                (f) => f.value.trim() !== "",
+            );
+        }
+
+        async function validateCaptcha(token) {
+            if (captchaChecking) return;
+            captchaChecking = true;
+
+            try {
+                const res = await fetch(CAPTCHA_VALIDATE_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token }),
+                });
+
+                captchaValid = res.ok;
+            } catch {
+                captchaValid = false;
+            } finally {
+                captchaChecking = false;
+                updateButtonState();
+            }
+        }
+
+        function updateButtonState() {
+            submitBtn.disabled = !(areFieldsFilled() && captchaValid);
+        }
+
+        // проверяем поля формы
+        requiredFields.forEach((field) => {
+            field.addEventListener("input", updateButtonState);
+        });
+
+        // проверяем капчу
+        setInterval(() => {
+            if (!window.smartCaptcha) return;
+
+            const token = window.smartCaptcha.getResponse();
+            if (token && token !== captchaToken) {
+                captchaToken = token;
+                captchaValid = false;
+                validateCaptcha(token);
+            }
+
+            if (!token) {
+                captchaValid = false;
+                captchaToken = null;
+                updateButtonState();
+            }
+        }, 500);
+
+        // финальная проверка перед submit
+        form.addEventListener("submit", (e) => {
+            if (!captchaValid || !areFieldsFilled()) {
+                e.preventDefault();
+                alert("Заполните все поля и пройдите капчу");
+            }
+        });
     });
 </script>
