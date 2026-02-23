@@ -1838,7 +1838,8 @@ textarea.w-input, textarea.w-select {
 
 .w-nav-menu {
   float: right;
-  position: relative;
+  position: absolute; 
+  top: 100%;
 }
 
 [data-nav-menu-open] {
@@ -7799,7 +7800,7 @@ blockquote {
     width: auto;
     padding: 14px;
     display: flex;
-    position: relative;
+    position: absolute;
   }
 
   .navbar-no-shadow-container-2 {
