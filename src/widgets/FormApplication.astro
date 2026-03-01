@@ -24,22 +24,22 @@
         >
             <div class="column-form">
                 <div class="form-column">
-                    <label for="Contact-Form-Name-2" class="sub-heading-regular"
+                    <label for="name" class="sub-heading-regular"
                         >Как Вас зовут?</label
                     >
                     <input
                         class="text-field w-input"
                         maxlength="256"
-                        name="Contact-Form-Name-2"
-                        data-name="Contact Form Name 2"
+                        name="name"
+                        data-name="name"
                         placeholder="ФИО"
                         type="text"
-                        id="Contact-Form-Name-2"
+                        id="name"
                         required
                     />
                 </div>
                 <div class="form-column">
-                    <label for="Mail" class="sub-heading-regular"
+                    <label for="phone" class="sub-heading-regular"
                         >Ваш номер телефона</label
                     >
                     <input
@@ -55,14 +55,14 @@
                 </div>
             </div>
             <div class="form-column">
-                <label for="Message" class="sub-heading-regular"
+                <label for="message" class="sub-heading-regular"
                     >Опишите ситуацию</label
                 >
                 <textarea
-                    id="Message"
-                    name="Message"
+                    id="message"
+                    name="message"
                     maxlength="5000"
-                    data-name="Message"
+                    data-name="message"
                     placeholder="Ваша проблема..."
                     class="text-field message _2 w-input"></textarea>
             </div>
@@ -109,6 +109,21 @@
 
     let isDeleting = false;
 
+    async function sendFormData(data) {
+        const res = await fetch(
+            "https://functions.yandexcloud.net/d4e5el8aut2t39f15adr",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            },
+        );
+
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "Ошибка отправки");
+        return json;
+    }
+
     input.addEventListener("keydown", (e) => {
         isDeleting = e.key === "Backspace" || e.key === "Delete";
     });
@@ -137,6 +152,8 @@
         const requiredFields = form.querySelectorAll(
             "input[required], textarea[required]",
         );
+        const successMessage = form.parentElement.querySelector(".w-form-done");
+        const errorMessage = form.parentElement.querySelector(".w-form-fail");
 
         const CAPTCHA_VALIDATE_URL =
             "https://functions.yandexcloud.net/d4e939pp9u95f8katnq6";
@@ -162,7 +179,6 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ token }),
                 });
-
                 captchaValid = res.ok;
             } catch {
                 captchaValid = false;
@@ -176,22 +192,18 @@
             submitBtn.disabled = !(areFieldsFilled() && captchaValid);
         }
 
-        // проверяем поля формы
         requiredFields.forEach((field) => {
             field.addEventListener("input", updateButtonState);
         });
 
-        // проверяем капчу
         setInterval(() => {
             if (!window.smartCaptcha) return;
-
             const token = window.smartCaptcha.getResponse();
             if (token && token !== captchaToken) {
                 captchaToken = token;
                 captchaValid = false;
                 validateCaptcha(token);
             }
-
             if (!token) {
                 captchaValid = false;
                 captchaToken = null;
@@ -199,11 +211,35 @@
             }
         }, 500);
 
-        // финальная проверка перед submit
-        form.addEventListener("submit", (e) => {
-            if (!captchaValid || !areFieldsFilled()) {
-                e.preventDefault();
-                alert("Заполните все поля и пройдите капчу");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+
+            const data = new FormData(form);
+            const payload = {
+                name: data.get("name"),
+                phone: data.get("phone"),
+                message: data.get("message"),
+            };
+
+            try {
+                const result = await sendFormData(payload);
+
+                if (result.success) {
+                    // скрываем форму и показываем успешное сообщение
+                    form.style.display = "none";
+                    successMessage.style.display = "block";
+                    errorMessage.style.display = "none";
+                } else {
+                    throw new Error("Ошибка отправки");
+                }
+            } catch (err) {
+                console.error(err);
+                // показываем сообщение об ошибке
+                errorMessage.style.display = "block";
+                successMessage.style.display = "none";
+            } finally {
+                submitBtn.disabled = false;
             }
         });
     });
