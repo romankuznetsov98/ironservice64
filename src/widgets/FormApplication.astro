@@ -110,12 +110,16 @@
     let isDeleting = false;
 
     async function sendFormData(data) {
+        const modifiedData = {
+            ...data,
+            message: `${data.message}\n Заказ оформлен с сайта со скидкой 10%`,
+        };
         const res = await fetch(
             "https://functions.yandexcloud.net/d4e5el8aut2t39f15adr",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                body: JSON.stringify(modifiedData),
             },
         );
 
