@@ -1,0 +1,18 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="service-description">
+  <div class="section-tittle left service-desc-title">
+    <div class="text-content left service-desc-text">
+      <h2 class="heading-style-h1 left service-desc-h2">Что мы делаем</h2>
+    </div>
+  </div>
+  <div class="rich-text w-richtext service-rich-text">
+    <p>{text}</p>
+  </div>
+</div>

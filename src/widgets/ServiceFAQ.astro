@@ -1,0 +1,67 @@
+---
+interface Props {
+  price: string | null;
+}
+
+const { price } = Astro.props;
+
+const faqItems = [
+  {
+    q: "Сколько стоит ремонт?",
+    a: `Стоимость зависит от модели и сложности поломки. Точную цену называем после бесплатной диагностики. Ориентировочно от ${price || "1 000"} ₽.`,
+  },
+  {
+    q: "Нужно ли везти технику в сервис?",
+    a: "Крупную бытовую технику мастер ремонтирует у вас на дому. Мелкую можно привезти в сервисный центр в Саратове или Энгельсе.",
+  },
+  {
+    q: "Даёте ли вы гарантию?",
+    a: "Да. На все выполненные работы и установленные запчасти предоставляется гарантия сервиса IronService.",
+  },
+  {
+    q: "За какое время почините?",
+    a: "Большинство неисправностей устраняем за один выезд мастера. Сложные случаи — после получения запчастей.",
+  },
+];
+---
+
+<div class="service-faq">
+  <div class="section-tittle center service-faq-title-block">
+    <div class="text-content left service-faq-text-block">
+      <h2 class="heading-style-h1 left service-faq-h2">Частые вопросы</h2>
+    </div>
+  </div>
+  <div class="service-faq-list">
+    {faqItems.map((f, idx) => (
+      <div class="service-faq-item" data-faq={idx}>
+        <div class="service-faq-question" data-question>
+          <div class="service-faq-q-text">{f.q}</div>
+          <div class="service-faq-icon">
+            <svg width="24" height="24" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 2 6 10"></polyline>
+              <polyline points="2 6 10 6"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="service-faq-answer-wrapper">
+          <div class="service-faq-answer">{f.a}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll('[data-faq]');
+    items.forEach((item) => {
+      const question = item.querySelector('[data-question]');
+      if (!question) return;
+      question.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+        items.forEach((i) => i.classList.remove("active"));
+        if (!isActive) item.classList.add("active");
+      });
+    });
+  });
+</script>
