@@ -1,0 +1,58 @@
+---
+interface Props {
+  item: { title: string; imageUrl: string };
+  category: { title: string; propertyUrl: string };
+  price: string | null;
+}
+
+const { item, category, price } = Astro.props;
+---
+
+<div class="wrapper-cms service-hero">
+  <div class="column-cms-nav service-header-nav">
+    <a
+      href={category.propertyUrl}
+      class="helper link w-inline-block service-back-btn"
+      id="back-button"
+    >
+      <div class="icon-2 w-embed service-back-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="#000" d="M11.03 8.53a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06l-2.72-2.72H18a.75.75 0 0 0 0-1.5H8.31z"/>
+        </svg>
+      </div>
+      <div class="title-badge service-back-label">Вернуться к услугам</div>
+    </a>
+    <div class="badge service-location-badge">
+      <img loading="lazy" src="/icons/locations.svg" alt="location" class="icon"/>
+      <div class="tittle-badge service-location-text">Саратов, Энгельс</div>
+    </div>
+  </div>
+
+  <div class="service-title-wrap">
+    <div class="service-text-content">
+      <h1 class="heading-style-h1 left service-h1">{item.title}</h1>
+      <p class="paragraph-large left service-subtitle">{category.title}</p>
+    </div>
+    {price && (
+      <div class="service-price-and-btn">
+        <div class="service-price-wrap">
+          <div class="service-price-row">
+            <span class="service-price-label">от</span>
+            <span class="service-price">{price} ₽</span>
+          </div>
+        </div>
+        <div class="service-btn-col">
+          <a href="/contact" class="button w-button service-cta-btn">Оставить заявку на ремонт</a>
+        </div>
+      </div>
+    )}
+  </div>
+
+  <img
+    data-w-id="aa8f6877-1c14-7058-d4ee-5c7d0ded6a80"
+    alt={item.title}
+    src={item.imageUrl}
+    loading="lazy"
+    class="tumbnail service-hero-img"
+  />
+</div>

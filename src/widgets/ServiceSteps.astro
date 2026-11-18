@@ -1,0 +1,26 @@
+---
+interface Props {
+  steps: Array<{ num: string; title: string; text: string }>;
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="service-steps">
+  <div class="section-tittle center service-steps-title-block">
+    <div class="text-content left service-steps-text-block">
+      <h2 class="heading-style-h1 left service-steps-h2">Как проходит ремонт</h2>
+    </div>
+  </div>
+  <div class="service-track">
+    {steps.map((s) => (
+      <div class="service-track-step">
+        <div class="service-track-marker">{s.num}</div>
+        <div class="service-track-content">
+          <div class="service-step-title">{s.title}</div>
+          <div class="service-step-text">{s.text}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

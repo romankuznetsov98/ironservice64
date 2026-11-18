@@ -1,0 +1,26 @@
+---
+interface Props {
+  items: Array<{ label: string; text: string; icon: string }>;
+}
+
+const { items } = Astro.props;
+---
+
+<div class="service-trust">
+  <div class="section-tittle center service-trust-title-block">
+    <div class="text-content left service-trust-text-block">
+      <h2 class="heading-style-h1 left service-trust-h2">Почему выбирают IronService</h2>
+    </div>
+  </div>
+  <div class="service-trust-grid">
+    {items.map((t) => (
+      <div class="service-trust-card">
+        <div class="service-trust-icon" set:html={t.icon}></div>
+        <div class="service-trust-content">
+          <div class="service-trust-title">{t.label}</div>
+          <div class="service-trust-text">{t.text}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

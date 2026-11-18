@@ -1,5 +1,14 @@
 ---
 import type { IServiceItem, IServiceCategory } from "../utils/types";
+import "./ServicePageCard.css";
+import ServiceHero from "./ServiceHero.astro";
+import ServiceTrust from "./ServiceTrust.astro";
+import ServiceDescription from "./ServiceDescription.astro";
+import ServiceBenefits from "./ServiceBenefits.astro";
+import ServiceReviews from "./ServiceReviews.astro";
+import ServiceSteps from "./ServiceSteps.astro";
+import ServiceFAQ from "./ServiceFAQ.astro";
+import ServiceFinal from "./ServiceFinal.astro";
 
 interface Props {
   item: IServiceItem;
@@ -7,51 +16,46 @@ interface Props {
 }
 
 const { item, category } = Astro.props;
+
+const price = item.price ? item.price.toLocaleString("ru-RU") : null;
+
+const trustItems = [
+  { label: "Бесплатная диагностика", text: "При согласии на ремонт диагностика не оплачивается", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' },
+  { label: "Гарантия на работы", text: "Даём гарантию на все выполненные работы и запчасти", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>' },
+  { label: "Выезд мастера", text: "Приедем к вам домой или в офис по Саратову и Энгельсу", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' },
+  { label: "Быстрые сроки", text: "Большинство поломок устраняем за один визит", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>' },
+  { label: "Скидка для пенсионеров", text: "При предъявлении пенсионного удостоверения предоставляем скидку на ремонт", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>' },
+];
+
+const steps = [
+  { num: "01", title: "Оставьте заявку", text: "Заполните форму или позвоните — мы уточним детали неисправности" },
+  { num: "02", title: "Диагностика", text: "Мастер приезжает в удобное время и бесплатно определяет причину поломки" },
+  { num: "03", title: "Ремонт", text: "Чиним технику на месте или забираем в сервисный центр с вашего согласия" },
+  { num: "04", title: "Гарантия", text: "Вы получаете технику назад с гарантией на работы и запчасти" },
+];
 ---
 
-<main id="Hero" class="section top">
-    <div class="padding-global">
-        <div class="container-medium">
-            <div data-w-id="20edfcf6-67bf-dec8-13c3-531f3d0236db" style="opacity:1;-webkit-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="wrapper-cms">
-                <div class="column-cms-nav">
-                    <a href={category.propertyUrl} class="helper link w-inline-block" id="back-button">
-                        <div class="icon-2 w-embed">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="#000" d="M11.03 8.53a.75.75 0 1 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06l-2.72-2.72H18a.75.75 0 0 0 0-1.5H8.31z"/>
-                            </svg>
-                        </div>
-                        <div class="title-badge">Вернуться</div>
-                    </a>
-                    <div class="badge">
-                        <img loading="lazy" src="https://cdn.prod.website-files.com/68c0e3e4af3be748783bb0f3/68c23585a391010f9cc22fae_proicons--location.svg" alt="location" class="icon"/>
-                        <div class="tittle-badge">Саратов, Энгельс</div>
-                    </div>
-                </div>
-                <div class="section-tittle left">
-                    <div class="text-content left">
-                        <h1 class="heading-style-h1 left">{item.title}</h1>
-                        <p class="paragraph-large left">{category.title}</p>
-                    </div>
-                    <div class="column-cms-nav">
-                        <div class="content-properties list">
-                            <div class="badge">
-                                <img loading="lazy" src="/icons/parchment.png" alt="пергамент" class="icon"/>
-                                <div class="tittle-badge">Опишите проблему и оставьте заявку</div>
-                            </div>
-                        </div>
-                        <!-- <div class="badge two">
-                            <div class="sub-heading-large">от</div>
-                            <div class="sub-heading-large">{item.price}₽</div>
-                        </div> -->
-                    </div>
-                </div>
-                <img style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" data-w-id="aa8f6877-1c14-7058-d4ee-5c7d0ded6a80" alt={item.title} src={item.imageUrl} loading="lazy" class="tumbnail preview"/>
-                <div class="rich-text w-richtext">
-                    <p>{item.text}</p>
-                </div>
-                <a data-w-id="ea84d01c-ab2e-9168-935f-62025977c07b" href="/contact" class="button w-button">Оставить заявку</a>
-            </div>
-        </div>
+<main id="service-page" class="section top service-page">
+  <div class="padding-global">
+    <div class="container-medium">
+      <ServiceHero item={item} category={category} price={price} />
+
+      <ServiceTrust items={trustItems} />
+
+      <ServiceDescription text={item.text} />
+
+      <div class="service-combined">
+        <ServiceBenefits />
+        <ServiceReviews />
+      </div>
+
+      <ServiceSteps steps={steps} />
+
+      <ServiceFAQ price={price} />
+
+      <ServiceFinal />
     </div>
+  </div>
+
+  <img loading="lazy" src="/image/services/default_header.jpg" alt="схемы" class="tumbnail banner"/>
 </main>
- <img loading="lazy" src="/image/services/default_header.jpg" alt="схемы" class="tumbnail banner"/>

@@ -1,0 +1,113 @@
+---
+interface Props {}
+---
+
+<div class="service-reviews-col">
+  <div class="section-tittle left service-reviews-title-block">
+    <div class="text-content left service-reviews-text-block">
+      <h2 class="heading-style-h1 left service-reviews-h2">Отзывы клиентов</h2>
+    </div>
+  </div>
+  <div class="service-reviews-grid">
+    <div class="service-review-card">
+      <div class="service-review-header">
+        <div class="service-review-avatar">А</div>
+        <div class="service-review-name">Алексей Матутин</div>
+        <div class="service-review-source">
+          <span class="service-source-badge">Google</span>
+        </div>
+        <div class="service-review-rating">★★★★★</div>
+      </div>
+      <div class="service-review-text-wrapper">
+        <div class="service-review-text service-review-text--collapsed" data-text>
+          «Не однократно обращался с различной техникой(телефон сабвуфер, колонки, массажер) всегда все делали быстро и не дорого.»
+        </div>
+        <button class="service-review-toggle" aria-expanded="false" aria-controls="review-0-text" type="button">
+          <span class="service-review-toggle-text">Показать полностью</span>
+          <span class="service-review-toggle-icon">▾</span>
+        </button>
+      </div>
+    </div>
+    <div class="service-review-card">
+      <div class="service-review-header">
+        <div class="service-review-avatar">А</div>
+        <div class="service-review-name">Анастасия Павловна</div>
+        <div class="service-review-source">
+          <span class="service-source-badge">Яндекс</span>
+        </div>
+        <div class="service-review-rating">★★★★★</div>
+      </div>
+      <div class="service-review-text-wrapper">
+        <div class="service-review-text service-review-text--collapsed" data-text>
+          «Отличный сервис, обращалась несколько лет назад по поводу ремонта ноутбука, работает без нареканий до сих пор, хотя уже далеко не новый. Регулярно заправляю катридж, всё быстро и недорого. Последний раз чудесная девушка помогла бесплатно восстановить данные с флешки. Очень рекомендую»
+        </div>
+        <button class="service-review-toggle" aria-expanded="false" aria-controls="review-1-text" type="button">
+          <span class="service-review-toggle-text">Показать полностью</span>
+          <span class="service-review-toggle-icon">▾</span>
+        </button>
+      </div>
+    </div>
+    <div class="service-review-card">
+      <div class="service-review-header">
+        <div class="service-review-avatar">Г</div>
+        <div class="service-review-name">Гульмира Moсквичева</div>
+        <div class="service-review-source">
+          <span class="service-source-badge">Google</span>
+        </div>
+        <div class="service-review-rating">★★★★★</div>
+      </div>
+      <div class="service-review-text-wrapper">
+        <div class="service-review-text service-review-text--collapsed" id="review-2-text" data-text>
+          «Отличный сервис! Я неоднократно обращался к ним с различной техникой, и мастера всегда выполняли работу на высшем уровне. Персонал очень вежливый, всегда подробно объясняет, что не так с устройством, и дает полезные советы по продлению его срока службы. Работают быстро и качественно. Я давно пользуюсь их услугами: изначально они занимались ремонтом компьютеров, а затем расширили спектр на ноутбуки. За годы работы они отремонтировали много техники, и я с радостью рекомендую их своим друзьям! У них также есть магазин, где можно приобрести запчасти для бытовой техники и не только. Сервис существует на рынке уже достаточно долго, и сарафанное радио сыграло в этом важную роль — мне его порекомендовали знакомые. Конечно, конкуренция велика, и иногда встречаются странные отзывы, но угодить всем невозможно. Они занимаются ремонтом не только бытовой и компьютерной техники, но и многими другими устройствами. Также есть возможность вызвать мастера на дом, что особенно удобно для крупной бытовой техники. Желаю им удачи и процветания в их деятельности!»</div>
+        <button class="service-review-toggle" aria-expanded="false" aria-controls="review-2-text" type="button">
+          <span class="service-review-toggle-text">Показать полностью</span>
+          <span class="service-review-toggle-icon">▾</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="service-reviews-more">
+    <a href="https://yandex.ru/maps/org/ironservice" target="_blank" rel="noopener" class="service-review-link">Все отзывы на Яндекс</a>
+    <a href="https://g.page/ironservice" target="_blank" rel="noopener" class="service-review-link">Все отзывы на Google</a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const MAX_CHARS = 300;
+    const MAX_LINES = 4;
+
+    const toggles = document.querySelectorAll(".service-review-toggle");
+
+    toggles.forEach((toggle) => {
+      const wrapper = toggle.parentElement;
+      const textEl = wrapper.querySelector("[data-text]");
+      const text = textEl.textContent.trim();
+
+      if (text.length <= MAX_CHARS) {
+        toggle.style.display = "none";
+        textEl.classList.remove("service-review-text--collapsed");
+        return;
+      }
+
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isExpanded));
+
+        if (!isExpanded) {
+          textEl.classList.remove("service-review-text--collapsed");
+          textEl.style.maxHeight = textEl.scrollHeight + "px";
+          toggle.querySelector(".service-review-toggle-text").textContent = "Свернуть";
+          toggle.querySelector(".service-review-toggle-icon").textContent = "▴";
+        } else {
+          textEl.classList.add("service-review-text--collapsed");
+          textEl.style.maxHeight = "";
+          toggle.querySelector(".service-review-toggle-text").textContent = "Показать полностью";
+          toggle.querySelector(".service-review-toggle-icon").textContent = "▾";
+        }
+      });
+
+      textEl.style.maxHeight = "76px";
+    });
+  });
+</script>
