@@ -6,6 +6,7 @@ import Section from "../components/Section/index.astro";
 import SectionHeader from "../components/SectionHeader/index.astro";
 import ServiceList from "../components/ServiceList/index.astro";
 import BrendList from "../widgets/BrendList.astro";
+import Sales from "../components/Sales/index.astro";
 
 import Testimonials from "../components/Testimonials/index.astro";
 
@@ -33,6 +34,9 @@ const { title, description, image, advantages, seo } = page.data;
 			location: "Саратов",
 		}}
 	/>
+	<Section>
+		<Sales />
+	</Section>
 	<Section>
 		<SectionHeader
 			badgeText="Наши услуги"
